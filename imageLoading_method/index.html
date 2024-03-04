@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .grid {
+            display: grid;
+        }
+
+        img{
+            width: 100%;
+            aspect-ratio: 1/1;
+            display: block;
+            object-position: center;
+            object-fit: cover;
+        }
+        .blur-load::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            animation: pulse 2.5s infinite;
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .blur-load.loaded::before {
+            content: none;
+        }
+
+        @keyframes pulse {
+            0% {
+                background-color: rgba(255, 255, 255, 0);
+            }
+
+            50% {
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+            100% {
+                background-color: rgba(255, 255, 255, 0);
+            }
+        }
+
+        .blur-load {
+            background-size: cover;
+            background-position: cover ;
+        }
+
+        .blue-load.loaded{
+            opacity: 1;
+        }
+
+        .blur-load>img {
+            opacity: 0;
+            transition: opacity 200ms ease-in-out;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body style="margin: 0;">
+    <div class="grid">
+        <!-- just adding loading lazy greatly helps relief alot of the issues pages come accross -->
+        <div class="blur-load" style="background-image:url(imgs/img1-small.jpg) ;">
+            <img src="imgs/img1.jpg" loading="lazy">
+        </div>
+        <img src="imgs/img1.jpg" loading="lazy">
+        <img src="imgs/img1.jpg" loading="lazy">
+        <img src="imgs/img1.jpg" loading="lazy">
+        <img src="imgs/img1.jpg" loading="lazy">
+        <img src="imgs/img1.jpg" loading="lazy">
+        <img src="imgs/img1.jpg" loading="lazy">
+        <img src="imgs/img1.jpg" loading="lazy">
+        <img src="imgs/img1.jpg" loading="lazy">
+        <img src="imgs/img1.jpg" loading="lazy">
+        <img src="imgs/img1.jpg" loading="lazy">
+        <img src="imgs/img1.jpg" loading="lazy">
+        <img src="imgs/img1.jpg" loading="lazy">
+    </div>
+
+    <script>
+        const blurDivs = document.querySelectorAll(".blur-div")
+        blurDivs.forEach(div=> {
+            const img = div.querySelector("img")
+            console.log(img);
+            function loaded() {
+                div.classList.add("loaded");
+            }
+
+            if(img.complete) {
+                loaded()
+            } else {
+                img.addEventListener("load", loaded())
+            }
+        })
+    </script>
+</body>
+</html>
