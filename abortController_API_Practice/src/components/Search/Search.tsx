@@ -3,7 +3,7 @@
 // this code does not belong to me 
 // only using it to practice abort controller
 import Image from 'next/image';
-import { useState,useRef } from 'react';
+import React, { useState,useRef } from 'react';
 
 interface Result {
   poster: string;
