@@ -34,6 +34,7 @@ include 'phpDataBaseConnect/db.php';
     
     <div id="comments">
     <?php
+    // first run
         $sql= "SELECT * FROM comments LIMIT 2";
         $result = mysqli_query($conn, $sql);
 
